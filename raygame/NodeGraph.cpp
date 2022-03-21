@@ -50,7 +50,7 @@ DynamicArray<NodeGraph::Node*> NodeGraph::findPath(Node* start, Node* goal)
 	DynamicArray<NodeGraph::Node*> closedSet = DynamicArray<NodeGraph::Node*>();
 
 	Node* currentNode = start;
-	start->color = 0x00FF00FF;
+	start->color = 0xFFFF00FF;
 	openSet.addItem(start);
 
 	while (openSet.getLength() > 0)
