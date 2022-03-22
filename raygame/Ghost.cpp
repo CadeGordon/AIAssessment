@@ -6,6 +6,8 @@
 #include "PathfindComponent.h"
 #include "MoveComponent.h"
 #include "SpriteComponent.h"
+#include "SeekComponent.h"
+#include "WanderComponent.h"
 
 Ghost::Ghost(float x, float y, float maxSpeed, float maxForce, int color, Maze* maze)
 	: Agent(x, y, "Ghost", maxSpeed, maxForce)
