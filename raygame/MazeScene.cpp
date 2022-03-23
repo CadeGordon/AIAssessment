@@ -7,12 +7,14 @@
 #include "WanderComponent.h"
 #include "SeekComponent.h"
 #include "Agent.h"
+#include "PathfindEnemy.h"
 
 Maze::TileKey _ = Maze::TileKey::OPEN;
 Maze::TileKey w = Maze::TileKey::WALL;
 Maze::TileKey s = Maze::TileKey::MUD;
 Maze::TileKey p = Maze::TileKey::PLAYER;
 Maze::TileKey g = Maze::TileKey::GHOST;
+Maze::TileKey e = Maze::TileKey::PATHENEMY;
 
 Maze::Maze()
 {
@@ -29,7 +31,7 @@ Maze::Maze()
 		{ w, _, w, _, _, w, _, _, _, _, _, w, _, _, _, _, _, w, _, _, _, _, w, _, _, w, _, w },
 		{ w, _, w, _, _, _, _, _, _, _, _, w, w, w, w, w, w, w, _, _, _, _, _, _, _, w, _, w },
 		{ w, _, w, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, w, _, w },
-		{ w, _, _, _, _, _, _, g, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, w },
+		{ w, _, _, _, _, _, _, g, _, _, _, _, _, _, _, _, _, _, _, _, _, e, _, _, _, _, _, w },
 		{ w, _, w, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, w, _, w },
 		{ w, _, w, _, _, _, _, _, _, _, _, _, w, w, w, w, w, _, _, _, _, _, _, _, _, w, _, w },
 		{ w, _, w, _, _, w, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, w, _, _, w, _, w },
@@ -117,10 +119,10 @@ Maze::Tile Maze::createTile(int x, int y, TileKey key)
 		break;
 	case TileKey::GHOST:
 		tile.cost = 1.0f;
-		Ghost* ghost = new Ghost(position.x, position.y, 100, 50, 0xFF6666FF, this);
+		Ghost* ghost = new Ghost(position.x, position.y, 250, 250, 0xFF6666FF, this);
 		ghost->setTarget(m_player);
 
-		WanderComponent* wanderComponent = new WanderComponent(1000, 100, 200);
+		WanderComponent* wanderComponent = new WanderComponent(1000, 100, 500);
 		ghost->addComponent(wanderComponent);
 
 		SeekComponent* seekComponent = new SeekComponent();
@@ -134,6 +136,15 @@ Maze::Tile Maze::createTile(int x, int y, TileKey key)
 
 
 		break;
+
+	/*case TileKey::PATHENEMY:
+		tile.cost = 1.0f;
+		PathfindEnemy* pathEnemy = new PathfindEnemy(position.x, position.y, 250, 250, 0xFF6666FF, this);
+		ghost->setTarget(m_player);
+
+		tile.actor = pathEnemy;
+		addActor(tile.actor);
+		break;*/
 	}
 
 	return tile;

@@ -6,7 +6,8 @@ enum State
 	IDLE,
 	WANDER,
 	SEEK,
-	PATHFIND
+	PATHFIND,
+	SEEKINGWANDER
 };
 
 class SeekComponent;
@@ -32,6 +33,6 @@ private:
 	float m_seekForce;
 	float m_wanderForce;
 	float m_seekRange = 150;
-	float m_pathFindRange = 50;
+	float m_pathFindRange = 100;
 };
 

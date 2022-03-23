@@ -161,6 +161,7 @@
     <ClCompile Include="MoveComponent.cpp" />
     <ClCompile Include="NodeGraph.cpp" />
     <ClCompile Include="PathfindComponent.cpp" />
+    <ClCompile Include="PathfindEnemy.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="PlayerMoveComponent.cpp" />
     <ClCompile Include="Scene.cpp" />
@@ -187,6 +188,7 @@
     <ClInclude Include="MoveComponent.h" />
     <ClInclude Include="NodeGraph.h" />
     <ClInclude Include="PathfindComponent.h" />
+    <ClInclude Include="PathfindEnemy.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="PlayerMoveComponent.h" />
     <ClInclude Include="Scene.h" />
