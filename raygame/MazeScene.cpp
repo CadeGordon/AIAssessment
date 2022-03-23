@@ -3,6 +3,10 @@
 #include "Wall.h"
 #include "Ghost.h"
 #include "Transform2D.h"
+#include "StateMachineComponent.h"
+#include "WanderComponent.h"
+#include "SeekComponent.h"
+#include "Agent.h"
 
 Maze::TileKey _ = Maze::TileKey::OPEN;
 Maze::TileKey w = Maze::TileKey::WALL;
@@ -115,12 +119,27 @@ Maze::Tile Maze::createTile(int x, int y, TileKey key)
 		tile.cost = 1.0f;
 		Ghost* ghost = new Ghost(position.x, position.y, 100, 50, 0xFF6666FF, this);
 		ghost->setTarget(m_player);
+
+		WanderComponent* wanderComponent = new WanderComponent(1000, 100, 50);
+		ghost->addComponent(wanderComponent);
+
+		SeekComponent* seekComponent = new SeekComponent();
+		seekComponent->setSteeringForce(500);
+		seekComponent->setTarget(m_player);
+		ghost->addComponent(seekComponent);
+		ghost->addComponent<StateMachineComponent>();
+
 		tile.actor = ghost;
 		addActor(tile.actor);
+
+
 		break;
 	}
+
 	return tile;
 }
+
+
 
 void Maze::generate(TileKey map[Maze::HEIGHT][Maze::WIDTH])
 {

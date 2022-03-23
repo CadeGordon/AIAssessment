@@ -22,8 +22,8 @@ public:
 		WALL,
 		MUD,
 		PLAYER,
-		GHOST,
-		DOT
+		GHOST
+		
 	};
 
 	/// <summary>

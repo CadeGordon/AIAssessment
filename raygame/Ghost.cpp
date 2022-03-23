@@ -8,6 +8,8 @@
 #include "SpriteComponent.h"
 #include "SeekComponent.h"
 #include "WanderComponent.h"
+#include "AABBCollider.h"
+#include "StateMachineComponent.h"
 
 Ghost::Ghost(float x, float y, float maxSpeed, float maxForce, int color, Maze* maze)
 	: Agent(x, y, "Ghost", maxSpeed, maxForce)
@@ -19,6 +21,12 @@ Ghost::Ghost(float x, float y, float maxSpeed, float maxForce, int color, Maze* 
 	m_pathfindComponent->setColor(color);
 	addComponent(m_pathfindComponent);
 	addComponent(new SpriteComponent("Images/enemy.png"));
+	setCollider(new AABBCollider(this));
+
+
+	setMaxForce(50);
+	
+	
 }
 
 Ghost::~Ghost()

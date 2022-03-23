@@ -3,6 +3,8 @@
 
 class Maze;
 class PathfindComponent;
+class SeekComponent;
+class WanderComponent;
 
 class Ghost : public Agent
 {

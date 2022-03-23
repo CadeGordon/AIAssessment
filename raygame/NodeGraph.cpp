@@ -9,7 +9,7 @@ DynamicArray<NodeGraph::Node*> reconstructPath(NodeGraph::Node* start, NodeGraph
 
 	while (currentNode != start->previous)
 	{
-		currentNode->color = 0xFF0000FF;
+		currentNode->color = 0xFFFF00FF;
 		path.insert(currentNode, 0);
 		currentNode = currentNode->previous;
 	}

@@ -3,6 +3,7 @@
 #include "SeekComponent.h"
 #include "WanderComponent.h"
 #include "Transform2D.h"
+#include "PathfindComponent.h"
 
 void StateMachineComponent::start()
 {
@@ -14,7 +15,9 @@ void StateMachineComponent::start()
 	m_wanderComponent = getOwner()->getComponent<WanderComponent>();
 	m_wanderForce = m_wanderComponent->getSteeringForce();
 
-	m_currentState = IDLE;
+	m_pathFindComponent = getOwner()->getComponent<PathFindComponent>();
+
+	m_currentState = WANDER;
 }
 
 void StateMachineComponent::update(float deltaTime)
@@ -26,6 +29,7 @@ void StateMachineComponent::update(float deltaTime)
 	float distanceFromTarget = (targetPos - ownerPos).getMagnitude();
 
 	bool targetInRange = distanceFromTarget <= m_seekRange;
+	bool targetInPath = distanceFromTarget <= m_pathFindRange;
 
 	switch (m_currentState)
 	{

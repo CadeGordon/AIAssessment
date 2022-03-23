@@ -13,3 +13,17 @@ void Component::assignOwner(Actor* owner)
 
 	m_owner = owner;
 }
+
+void Component::setEnabled(bool value)
+{
+	if (m_enabled == value) return;
+
+	m_enabled = value;
+
+	if (m_enabled)
+		onEnabled();
+	else
+	{
+		onDisabled();
+	}
+}

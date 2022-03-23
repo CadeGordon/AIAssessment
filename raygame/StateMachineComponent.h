@@ -5,11 +5,13 @@ enum State
 {
 	IDLE,
 	WANDER,
-	SEEK
+	SEEK,
+	PATHFIND
 };
 
 class SeekComponent;
 class WanderComponent;
+class PathFindComponent;
 
 class StateMachineComponent :
 	public Component
@@ -26,8 +28,10 @@ private:
 	State m_currentState;
 	SeekComponent* m_seekComponent;
 	WanderComponent* m_wanderComponent;
+	PathFindComponent* m_pathFindComponent;
 	float m_seekForce;
 	float m_wanderForce;
 	float m_seekRange = 300;
+	float m_pathFindRange = 50;
 };
 

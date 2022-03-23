@@ -14,5 +14,7 @@ private:
 
 	MathLibrary::Vector2 m_target;
 	MathLibrary::Vector2 m_circlePos;
+
+	
 };
 

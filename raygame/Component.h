@@ -24,7 +24,8 @@ public:
 	bool getStarted() { return m_started; }
 
 	bool getEnabled() { return m_enabled; }
-	void setEnabled(bool value) { m_enabled = value; }
+	void setEnabled(bool value);
+
 
 	//Functions called by actor class
 	virtual void start() { m_started = true; }
@@ -34,6 +35,8 @@ public:
 	virtual void end() {}
 	virtual void onCollision(Actor* other) {}
 	virtual void onDestroy() {};
+	virtual void onEnabled() {};
+	virtual void onDisabled() {};
 
 private:
 	Actor* m_owner;

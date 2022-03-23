@@ -26,6 +26,8 @@ public:
 	/// <param name="owner">The Agent to which this Behavior belongs</param>
 	virtual void draw() override;
 
+	
+
 	/// <summary>
 	/// Update the current path to the target.
 	/// This is called by update(Agent*,float).
@@ -50,6 +52,8 @@ public:
 
 	int getColor() { return m_color; }
 	void setColor(int color) { m_color = color; }
+
+	void onEnabled() override { m_needPath = true; }
 
 protected:
 	virtual MathLibrary::Vector2 findDestination();
