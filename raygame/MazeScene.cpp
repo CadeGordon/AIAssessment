@@ -120,7 +120,7 @@ Maze::Tile Maze::createTile(int x, int y, TileKey key)
 		Ghost* ghost = new Ghost(position.x, position.y, 100, 50, 0xFF6666FF, this);
 		ghost->setTarget(m_player);
 
-		WanderComponent* wanderComponent = new WanderComponent(1000, 100, 50);
+		WanderComponent* wanderComponent = new WanderComponent(1000, 100, 200);
 		ghost->addComponent(wanderComponent);
 
 		SeekComponent* seekComponent = new SeekComponent();
