@@ -8,6 +8,7 @@
 #include "SeekComponent.h"
 #include "Agent.h"
 #include "PathfindEnemy.h"
+#include "PathfindComponent.h"
 
 Maze::TileKey _ = Maze::TileKey::OPEN;
 Maze::TileKey w = Maze::TileKey::WALL;
@@ -75,7 +76,7 @@ Maze::~Maze()
 
 void Maze::draw()
 {
-	NodeGraph::drawGraph(m_grid[0][0].node);
+	//NodeGraph::drawGraph(m_grid[0][0].node);
 	Scene::draw();
 }
 
@@ -118,33 +119,40 @@ Maze::Tile Maze::createTile(int x, int y, TileKey key)
 		addActor(tile.actor);
 		break;
 	case TileKey::GHOST:
+	{
 		tile.cost = 1.0f;
 		Ghost* ghost = new Ghost(position.x, position.y, 250, 250, 0xFF6666FF, this);
 		ghost->setTarget(m_player);
 
-		WanderComponent* wanderComponent = new WanderComponent(1000, 100, 500);
-		ghost->addComponent(wanderComponent);
 
-		SeekComponent* seekComponent = new SeekComponent();
-		seekComponent->setSteeringForce(500);
-		seekComponent->setTarget(m_player);
-		ghost->addComponent(seekComponent);
-		ghost->addComponent<StateMachineComponent>();
 
 		tile.actor = ghost;
 		addActor(tile.actor);
 
-
+	}
 		break;
 
-	/*case TileKey::PATHENEMY:
+	case TileKey::PATHENEMY:
+	{
 		tile.cost = 1.0f;
 		PathfindEnemy* pathEnemy = new PathfindEnemy(position.x, position.y, 250, 250, 0xFF6666FF, this);
-		ghost->setTarget(m_player);
+		pathEnemy->setTarget(m_player);
+
+		WanderComponent* wanderComponent = new WanderComponent(1000, 100, 500);
+		pathEnemy->addComponent(wanderComponent);
+
+
+
+		SeekComponent* seekComponent = new SeekComponent();
+		seekComponent->setSteeringForce(500);
+		seekComponent->setTarget(m_player);
+		pathEnemy->addComponent(seekComponent);
+		pathEnemy->addComponent<StateMachineComponent>();
 
 		tile.actor = pathEnemy;
 		addActor(tile.actor);
-		break;*/
+	}
+		break;
 	}
 
 	return tile;

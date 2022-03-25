@@ -10,9 +10,10 @@
 #include "WanderComponent.h"
 #include "AABBCollider.h"
 #include "StateMachineComponent.h"
+#include "Engine.h"
 
 PathfindEnemy::PathfindEnemy(float x, float y, float maxSpeed, float maxForce, int color, Maze* maze)
-	: Agent(x, y, "Ghost", maxSpeed, maxForce)
+	: Agent(x, y, "PathEnemy", maxSpeed, maxForce)
 {
 	m_maze = maze;
 	getTransform()->setScale({ Maze::TILE_SIZE,Maze::TILE_SIZE });
@@ -41,6 +42,7 @@ void PathfindEnemy::draw()
 
 void PathfindEnemy::onCollision(Actor* other)
 {
+	//if the path enemy collides with wall it will bounce off
 	if (Wall* wall = dynamic_cast<Wall*>(other)) {
 		MathLibrary::Vector2 halfTile = { Maze::TILE_SIZE / 2.0f, Maze::TILE_SIZE / 2.0f };
 		MathLibrary::Vector2 position = getTransform()->getWorldPosition();
@@ -53,6 +55,14 @@ void PathfindEnemy::onCollision(Actor* other)
 		getTransform()->setWorldPostion(tilePosition);
 
 		getMoveComponent()->setVelocity({ 0, 0 });
+	}
+
+	//if player collides with enemy
+	if (other->getName() == "Player")
+	{
+		//...close application
+		if (getName() == "PathEnemy")
+			Engine::CloseApplication();
 	}
 }
 

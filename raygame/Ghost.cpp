@@ -9,7 +9,8 @@
 #include "SeekComponent.h"
 #include "WanderComponent.h"
 #include "AABBCollider.h"
-#include "StateMachineComponent.h"
+#include "Engine.h"
+#include "PathfindEnemy.h"
 
 Ghost::Ghost(float x, float y, float maxSpeed, float maxForce, int color, Maze* maze)
 	: Agent(x, y, "Ghost", maxSpeed, maxForce)
@@ -39,8 +40,10 @@ void Ghost::draw()
 	Agent::draw();
 }
 
+
 void Ghost::onCollision(Actor* other)
 {
+     //if the ghost collides with the wall it will bounce off of it
 	if (Wall* wall = dynamic_cast<Wall*>(other)) {
 		MathLibrary::Vector2 halfTile = { Maze::TILE_SIZE / 2.0f, Maze::TILE_SIZE / 2.0f };
 		MathLibrary::Vector2 position = getTransform()->getWorldPosition();
@@ -53,6 +56,14 @@ void Ghost::onCollision(Actor* other)
 		getTransform()->setWorldPostion(tilePosition);
 
 		getMoveComponent()->setVelocity({ 0, 0 });
+	}
+
+	//if the player collides with ghost...
+	if (other->getName() == "Player")
+	{
+		//...reset the players position
+		if (getName() == "Ghost")
+			other->getTransform()->setWorldPostion({ 0, 0 });
 	}
 }
 

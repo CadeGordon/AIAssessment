@@ -6,8 +6,7 @@ enum State
 	IDLE,
 	WANDER,
 	SEEK,
-	PATHFIND,
-	SEEKINGWANDER
+	PATHFIND
 };
 
 class SeekComponent;
