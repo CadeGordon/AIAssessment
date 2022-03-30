@@ -58,6 +58,8 @@ DynamicArray<NodeGraph::Node*> NodeGraph::findPath(Node* start, Node* goal)
 		
 		sortFScore(openSet);
 		currentNode = openSet[0];
+		if (currentNode == goal)
+			return reconstructPath(start, goal);
 		openSet.remove(currentNode);
 
 		if (!closedSet.contains(currentNode))
@@ -82,8 +84,7 @@ DynamicArray<NodeGraph::Node*> NodeGraph::findPath(Node* start, Node* goal)
 			}
 			closedSet.addItem(currentNode);
 		}
-		if (currentNode == goal)
-			return reconstructPath(start, goal);
+		
 	}
 
 	return reconstructPath(start, goal);
