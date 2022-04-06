@@ -17,18 +17,18 @@ MathLibrary::Vector2 WanderComponent::calculateForce()
 	if (getSteeringForce() == 0)
 		return { 0,0 };
 
-	//Find the agents position and heading 
+	//Find the agents position 
 	MathLibrary::Vector2 ownerPosition = getOwner()->getTransform()->getWorldPosition();
-	MathLibrary::Vector2 heading = getAgent()->getMoveComponent()->getVelocity().getNormalized();
+	MathLibrary::Vector2 Direction = getAgent()->getMoveComponent()->getVelocity().getNormalized();
 
-	//Find the circles position in front of the agent
-	m_circlePos = ownerPosition + (heading * m_circleDistance);
+	//Sets the circle to be infront of the enemy
+	m_circlePos = ownerPosition + (Direction * m_circleDistance);
 
-	//Find a random vector in the circle
+	//Gets a random number in the circle to be able to wander
 	float randNum = (rand() % 201);
 	MathLibrary::Vector2 randDirection = MathLibrary::Vector2{ (float)cos(randNum), (float)sin(randNum) } * m_circleRadius;
 
-	//Add the random vector to the circle position to get a new random point on the circle
+	//Adds the random direction to the circle position
 	m_target = randDirection + m_circlePos;
 
 	//Seek to the random point

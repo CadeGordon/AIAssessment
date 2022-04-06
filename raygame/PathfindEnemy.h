@@ -25,7 +25,7 @@ public:
 	/// <returns>The current target</returns>
 	Actor* getTarget();
 	/// <summary>
-	/// Set the target of the ghost
+	/// Set the target of the path enemy
 	/// </summary>
 	/// <param name="target">The new target</param>
 	void setTarget(Actor* target);
