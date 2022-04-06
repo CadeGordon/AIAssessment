@@ -62,7 +62,7 @@ void PathfindEnemy::onCollision(Actor* other)
 	{
 		//...close application
 		if (getName() == "PathEnemy")
-			Engine::CloseApplication();
+			other->getTransform()->setWorldPostion({ 300, 750 });
 	}
 }
 

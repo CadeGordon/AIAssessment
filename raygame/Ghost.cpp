@@ -63,7 +63,7 @@ void Ghost::onCollision(Actor* other)
 	{
 		//...reset the players position
 		if (getName() == "Ghost")
-			other->getTransform()->setWorldPostion({ 0, 0 });
+			other->getTransform()->setWorldPostion({ 350, 700 });
 	}
 }
 
